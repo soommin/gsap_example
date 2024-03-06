@@ -169,9 +169,9 @@ flex-shrink: 이 속성은 flex 컨테이너가 너무 작아서 모든 항목�
   line-height: 1.5;
 }
 
-.sample {
+/* .sample {
   width: 100%;
   height: 100vh;
   background: #444;
   margin: auto;
-}
+} */
