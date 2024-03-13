@@ -1,6 +1,6 @@
 // JavaScript
-let title = "GSAP Example"; // 타이틀 텍스트 저장
-let displayTitle = document.getElementById("title"); // 타이틀 요소 아이디 저장
+let title = 'GSAP Example'; // 타이틀 텍스트 저장
+let displayTitle = document.getElementById('title'); // 타이틀 요소 아이디 저장
 let i = 0; // i 변수 0으로 초기화
 
 function typeWriter() {
@@ -15,7 +15,7 @@ function typeWriter() {
 
 typeWriter(); //typeWriter 함수 실행
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
   // html 파일 내 요소들이 모두 로드되었을 때 실행
   // luxy init
   // luxy.init({
@@ -27,13 +27,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const tl = gsap.timeline(); // 타임라인이 등록되면 from, to와 같은 효과를 사용할 수 있다.
   tl.from(
-    ".title .char",
+    '.title .char',
     1,
     /* duration: 1 */ {
       opacity: 0,
       yPercent: 130,
       stagger: 0.1,
-      ease: "expo.out",
+      ease: 'expo.out',
     }
   );
 
@@ -41,27 +41,32 @@ document.addEventListener("DOMContentLoaded", function () {
   const commonScrollTrigger = {
     header: {
       // 컨트롤러 등록(요소, 시작점, 끝나는점, 스크롤 동기화 여부 등)
-      trigger: ".header", // 애니메이션 시작점과 끝나는 지점의 기준
-      start: "top top", // 첫번째는 요소의 시작 위치, 두번째는 화면의 시작 위치
+      trigger: '.header', // 애니메이션 시작점과 끝나는 지점의 기준
+      start: 'top top', // 첫번째는 요소의 시작 위치, 두번째는 화면의 시작 위치
       scrub: 1.8, // 스크롤 동기화 여부, true일 경우 스크롤 타이밍에 맞춰 애니메이션 실행, 시간 적용 시 지정된 시간 만큼 지연 후 애니메이션 실행
       // markers: true, // 디버깅을 위한 마커 표시
     },
     about: {
-      trigger: ".about",
-      start: "top bottom",
+      trigger: '.about',
+      start: 'top bottom',
+      scrub: 1.8,
+    },
+    benefits: {
+      trigger: '.benefits',
+      start: 'top bottom',
       scrub: 1.8,
     },
   };
 
   // square rotate animation
   // const titleSquare = document.querySelector(".title-square");
-  const titleSquares = gsap.utils.toArray(".title-square");
+  const titleSquares = gsap.utils.toArray('.title-square');
 
   titleSquares.forEach((square) => {
     tl.from(square, {
       scrollTrigger: {
         trigger: square,
-        start: "top bottom",
+        start: 'top bottom',
         scrub: 1.8,
       },
       rotate: 760,
@@ -71,58 +76,58 @@ document.addEventListener("DOMContentLoaded", function () {
   function headerAnimation(xValue) {
     //이미지 애니메이션
     tl.to(
-      ".header-img",
+      '.header-img',
       3,
       {
-        clipPath: "circle(141.2% at 0 100%)",
-        ease: "expo.out",
+        clipPath: 'circle(141.2% at 0 100%)',
+        ease: 'expo.out',
       },
       2 // 화면 시작 후 2초 뒤에 애니메이션 실행
     );
 
-    tl.to(".header-img", {
+    tl.to('.header-img', {
       scrollTrigger: commonScrollTrigger.header,
       xPercent: xValue, // x축으로 70%만큼 이동
     });
 
-    tl.to(".header-img img", {
+    tl.to('.header-img img', {
       scrollTrigger: commonScrollTrigger.header,
       scale: 1.3, // 사진 크기 1.3배
     });
 
-    tl.to(".title-text-up", {
+    tl.to('.title-text-up', {
       scrollTrigger: commonScrollTrigger.header,
       yPercent: -150,
     });
 
-    tl.to(".title-stroke", {
+    tl.to('.title-stroke', {
       scrollTrigger: commonScrollTrigger.header,
       xPercent: 50,
     });
 
-    tl.to(".header-marq-wrapper", {
+    tl.to('.header-marq-wrapper', {
       scrollTrigger: commonScrollTrigger.header,
       xPercent: -50,
     });
 
-    tl.to(".header-marq-star img", {
+    tl.to('.header-marq-star img', {
       scrollTrigger: commonScrollTrigger.header,
       rotate: -720,
     });
   }
 
   function aboutAnimation() {
-    tl.from(".about-img", {
+    tl.from('.about-img', {
       scrollTrigger: commonScrollTrigger.about,
       yPercent: 80,
     });
 
-    tl.from(".about-img img", {
+    tl.from('.about-img img', {
       scrollTrigger: commonScrollTrigger.about,
       scale: 1.6,
     });
 
-    tl.to(".about-text", {
+    tl.to('.about-text', {
       scrollTrigger: commonScrollTrigger.about,
       yPercent: 50,
     });
@@ -131,12 +136,17 @@ document.addEventListener("DOMContentLoaded", function () {
   aboutAnimation();
 
   function benefitsAnimation() {
-    const benefits_nums = gsap.utils.toArray(".benefits_num");
+    const benefits_nums = gsap.utils.toArray('.benefits_num');
     console.log(benefits_nums);
 
     benefits_nums.forEach((num) => {
-      const data_speed = num.getAttribute("data-speed");
-      console.log(data_speed);
+      const data_speed = num.getAttribute('data-speed');
+      // console.log(1 - parseFloat(data_speed));
+
+      tl.from(num, {
+        scrollTrigger: commonScrollTrigger.benefits,
+        x: -data_speed,
+      });
     });
   }
 
@@ -154,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
   //==============================
 });
 
-const arr = ["홍콩반점", "오복성", "동보성"];
+const arr = ['홍콩반점', '오복성', '동보성'];
 
 console.log(arr[0]);
 
@@ -163,8 +173,8 @@ const obj = {
     짜장면: 5000,
     짬뽕: 6000,
   },
-  오복성: ["짜장면", "짬뽕"],
-  동보성: ["짜장면", "짬뽕"],
+  오복성: ['짜장면', '짬뽕'],
+  동보성: ['짜장면', '짬뽕'],
 };
 
 console.log(obj.홍콩반점.짜장면);
