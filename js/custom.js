@@ -52,8 +52,24 @@ document.addEventListener('DOMContentLoaded', function () {
       scrub: 1.8,
     },
     benefits: {
-      trigger: '.benefits',
+      trigger: '.benefits_lists',
       start: 'top bottom',
+      scrub: 1.8,
+    },
+    work: {
+      trigger: '.work',
+      start: 'top bottom',
+      scrub: 1.8,
+    },
+    service: {
+      trigger: '.service',
+      start: 'top bottom',
+      scrub: 1.8,
+    },
+    footer: {
+      trigger: 'footer',
+      start: 'top bottom',
+      end: 'bottom bottom',
       scrub: 1.8,
     },
   };
@@ -137,11 +153,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function benefitsAnimation() {
     const benefits_nums = gsap.utils.toArray('.benefits_num');
-    console.log(benefits_nums);
 
     benefits_nums.forEach((num) => {
       const data_speed = num.getAttribute('data-speed');
-      // console.log(1 - parseFloat(data_speed));
 
       tl.from(num, {
         scrollTrigger: commonScrollTrigger.benefits,
@@ -152,8 +166,57 @@ document.addEventListener('DOMContentLoaded', function () {
 
   benefitsAnimation();
 
+  function workAnimation() {
+    const work_elmts = gsap.utils.toArray('.work-item, .work-item-num');
+
+    work_elmts.forEach((num) => {
+      const data_speed = num.getAttribute('data-speed');
+
+      tl.from(num, {
+        scrollTrigger: commonScrollTrigger.work,
+        y: -data_speed,
+      });
+    });
+
+    tl.from('.work-item-image img', {
+      scrollTrigger: commonScrollTrigger.work,
+      scale: 1.6,
+    });
+  }
+
+  workAnimation();
+
+  function serviceAnimation() {
+    const arrow_elmts = gsap.utils.toArray('.service-arrow');
+
+    arrow_elmts.forEach((num) => {
+      const data_speed = num.getAttribute('data-speed');
+
+      tl.from(num, {
+        scrollTrigger: commonScrollTrigger.service,
+        x: -data_speed,
+      });
+    });
+  }
+
+  serviceAnimation();
+
+  function footerAnimation() {
+    const letter_elmts = gsap.utils.toArray('.footer-wrapper span');
+
+    letter_elmts.forEach((num) => {
+      const data_speed = num.getAttribute('data-speed');
+
+      tl.from(num, {
+        scrollTrigger: commonScrollTrigger.footer,
+        y: -data_speed,
+      });
+    });
+  }
+
+  footerAnimation();
+
   const wWidth = window.outerWidth;
-  // console.log(wWidth);
 
   if (wWidth > 1300) {
     headerAnimation(-70);
